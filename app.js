@@ -1,6 +1,6 @@
 /**
  * Computer play
- * @returns a random choice from: rock, paper or scissor
+ * @returns {string} a random choice from: rock, paper or scissor
  */
 const computerPlay = function () {
     const choices = ['rock', 'paper', 'scissor'];

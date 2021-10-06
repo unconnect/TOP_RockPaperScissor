@@ -51,6 +51,14 @@ const playGameRound = function (playerSelection, computerSelection) {
 
 }
 
+/**
+ * Prompts for the players selection and gives a random default
+ * @returns {string} Players selection
+ */
+const playerPlay = function () {
+    return prompt('Please make your choice (Rock, Paper or Scissor): ', computerPlay());
+}
+
 // Debug play randomly selection for both player for testing the game logic.
-console.log(playGameRound(computerPlay(), computerPlay()));
+console.log(playGameRound(playerPlay(), computerPlay()));
 

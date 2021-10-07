@@ -22,7 +22,7 @@ const getRandomInt = function (max) {
  * 
  * @param {string} playerSelection the players choice
  * @param {string} computerSelection the randomly selected computers choice
- * @returns {string} the result of the round
+ * @returns {object} roundResult
  */
 const playGameRound = function (playerSelection, computerSelection) {
 
@@ -81,8 +81,7 @@ const playerPlay = function () {
 
 /**
  * The main game loop
- * 
- * @returns
+ *  
  */
 
 const game = function () {

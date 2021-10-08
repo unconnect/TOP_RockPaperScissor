@@ -39,7 +39,7 @@ const playGameRound = function (playerSelection, computerSelection) {
         playerSelection === 'paper' && computerSelection === 'rock' ||
         playerSelection === 'scissor' && computerSelection === 'paper'
     );
-    const isTie = (playerSelection === computerSelection);
+    const tie = (playerSelection === computerSelection);
 
     // Debug check the computers selection for this round.
     console.log('Players selection: ' + playerSelection);
@@ -53,7 +53,7 @@ const playGameRound = function (playerSelection, computerSelection) {
     // The result could be an object.
     // The result should than be used outside this function.
 
-    if (isTie) {
+    if (tie) {
         roundResult.playerPoint = 0;
         roundResult.computerPoint = 0;
     }
@@ -61,7 +61,7 @@ const playGameRound = function (playerSelection, computerSelection) {
     if (playerWonRound) {
         roundResult.playerPoint = 1;
         roundResult.computerPoint = 0;
-    } else if (!playerWonRound && !isTie) {
+    } else if (!playerWonRound && !tie) {
         roundResult.playerPoint = 0;
         roundResult.computerPoint = 1;
     }

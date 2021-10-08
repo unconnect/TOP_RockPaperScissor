@@ -79,6 +79,20 @@ const playerPlay = function () {
     return prompt('Please make your choice (Rock, Paper or Scissor): ', computerPlay());
 }
 
+const getWinner = function (gameResult) {
+    let winner = '';
+
+    if (gameResult.playerPoints > gameResult.computerPoints) {
+        winner = 'the Player';
+    } else if (gameResult.playerPoints < gameResult.computerPoints) {
+        winner = 'the Computer';
+    } else {
+        winner = 'Nobody';
+    }
+
+    return winner;
+}
+
 /**
  * The main game loop
  *  
@@ -124,14 +138,7 @@ const game = function () {
         gameIsNotFinished = (gameRound > maxGameRounds) ? false : true;
     }
 
-    // Check who is the winner and print it out.
-    if(gameResult.playerPoints > gameResult.computerPoints) {
-        winner = 'the Player';
-    } else if (gameResult.playerPoints < gameResult.computerPoints) {
-        winner = 'the Computer';
-    } else {
-        winner = 'Nobody';
-    }
+    winner = getWinner(gameResult);
 
     console.log(`The winner of the game is ${winner}!`);
 

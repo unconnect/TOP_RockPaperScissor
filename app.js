@@ -40,32 +40,23 @@ const playGameRound = function (playerSelection, computerSelection) {
         playerSelection === 'scissor' && computerSelection === 'paper'
     );
     const tie = (playerSelection === computerSelection);
+    const computerWon = (!playerWonRound && !tie);
 
     // Debug check the computers selection for this round.
     console.log('Players selection: ' + playerSelection);
     console.log('Computers selection: ' + computerSelection);
     
-
-    // What are we returning now? Maybe it should update an object and returns that everytime?
-    //
-    // I thing the best (right now) would be to return JUST the result of each round,
-    // for each player. 
-    // The result could be an object.
-    // The result should than be used outside this function.
-
-    if (tie) {
-        roundResult.playerPoint = 0;
-        roundResult.computerPoint = 0;
-    }
-
-    if (playerWonRound) {
-        roundResult.playerPoint = 1;
-        roundResult.computerPoint = 0;
-    } else if (!playerWonRound && !tie) {
+    if (computerWon) {
         roundResult.playerPoint = 0;
         roundResult.computerPoint = 1;
-    }
-
+    } else if (playerWonRound) {
+        roundResult.playerPoint = 1;
+        roundResult.computerPoint = 0;
+    } else if (tie) {
+        roundResult.playerPoint = 0;
+        roundResult.computerPoint = 0;
+    }  
+        
     console.log(roundResult);
     return roundResult;
 
@@ -79,6 +70,11 @@ const playerPlay = function () {
     return prompt('Please make your choice (Rock, Paper or Scissor): ', computerPlay());
 }
 
+/**
+ * Checks the game result for winner
+ * @param {object} gameResult gets the players and computers game score
+ * @returns {string} winner
+ */
 const getWinner = function (gameResult) {
     let winner = '';
 

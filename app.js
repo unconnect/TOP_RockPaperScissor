@@ -140,7 +140,7 @@ const game = function () {
 
 }
 
-game();
+// game();
 
 // // Debug play randomly selection for both player for testing the game logic.
 // console.log(playGameRound(playerSelection, computerSelection));

@@ -1,0 +1,55 @@
+pre {
+    overflow: hidden;
+}
+
+.game {
+    padding:1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:100vh;
+}
+
+.game > * {
+    margin-bottom: 1rem;
+    height: calc(50% - 1rem);
+}
+
+.message-list {
+    height: calc(100%);
+    overflow: auto;
+}
+
+.game__choices {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
+.game__choices .nes-badge {
+    margin: auto;
+}
+
+.game__choices > * {
+    max-width: calc(33% - 2rem);
+    display: flex;
+    flex-direction: column;
+}
+
+.game__choices [class$="--assci"] {
+    padding:0;
+    margin: 0 -1.5rem;
+}
+
+.game__choices [class^="game__choices_"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    color: black;
+}
+
+.game__choices .selected,
+.game__choices .selected [class$="--assci"] {
+    background-color:silver;
+} 

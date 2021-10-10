@@ -1,12 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissor</title>
-</head>
-<body>
+
+    <!-- CSS web front -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+
+    <!-- CSS NES framework -->
+    <link
+      href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- CSS app.css -->
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <main class="game">
+      <section class="game__status nes-container with-title">
+        <p class="title">
+            Game Status
+        </p>
+        <section class="message-list">
+          <section class="message -left">
+            <i class="nes-bcrikko"></i>
+            <!-- Balloon -->
+            <div class="nes-balloon from-left">
+              <h1>Welcome to Rock Paper Scissor</h1>
+              <p>
+                Play a game of 5 rounds against me.<br />
+                <span class="nes-text is-success">Please make a choice!</span></p>
+              </p>
+            </div>
+          </section>
+
+          <section class="message -left">
+            <i class="nes-bcrikko"></i>
+            <!-- Balloon -->
+            <div class="nes-balloon from-left">
+              <p>I played: ROCK</p>
+            </div>
+          </section>
+          <section class="message -left">
+            <i class="nes-bcrikko"></i>
+            <!-- Balloon -->
+            <div class="nes-balloon from-left">
+              <p>I played: ROCK</p>
+            </div>
+          </section>
+        </section>
+      </section>
+      <section class="game__choices nes-container  is-dark">
+
+        <div class="game__choices_rock nes-container is-rounded">
+          <div class="game__choices_rock--assci">
+            <pre>
+   ______
+--'  ____)
+      (_____)
+      (_____)
+      (____)
+--.__(___)
+                    </pre
+            >
+          </div>
+          <button class="nes-btn is-primary">Rock</button>
+        </div>
+
+        <div class="game__choices_paper nes-container is-rounded selected">
+            <div class="nes-badge">
+                <span class="is-warning">Selected</span>
+            </div>
+          <div class="game__choices_paper--assci">
+            <pre>
+   ___
+--'   __)__
+          __)
+         ___)
+        ___)
+--.______)
+                    </pre
+            >
+          </div>
+          <button class="nes-btn is-primary">Paper</button>
+        </div>
+
+        <div class="game__choices_scissor nes-container is-rounded">
+          <div class="game__choices_scissor--assci">
+            <pre>
+   _____
+--' ____)____
+        ______)
+    __________)
+      (____)
+--._(___)
+                    </pre
+            >
+          </div>
+          <button class="nes-btn is-primary">Scissor</button>
+        </div>
+
+      </section>
+    </main>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>

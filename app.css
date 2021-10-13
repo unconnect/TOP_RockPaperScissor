@@ -45,11 +45,11 @@ pre {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: white;
+    background-color: silver;
     color: black;
 }
 
 .game__choices .selected,
 .game__choices .selected [class$="--assci"] {
-    background-color:silver;
+    background-color:white;
 } 

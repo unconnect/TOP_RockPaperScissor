@@ -24,14 +24,14 @@ const getRandomInt = function (max) {
  * @param {string} computerSelection the randomly selected computers choice
  * @returns {object} roundResult
  */
-const playGameRound = function (playerSelection, computerSelection) {
+const getGameRoundResult = function (playerSelection, computerSelection) {
 
     let roundResult = {
         playerPoint: 0,
         computerPoint: 0
     }
 
-    playerSelection = playerSelection.toLowerCase();
+    playerSelection = (playerSelection) ? playerSelection.toLowerCase() : '';
     computerSelection = computerSelection.toLowerCase();
 
     const playerWonRound = (
@@ -63,14 +63,6 @@ const playGameRound = function (playerSelection, computerSelection) {
 }
 
 /**
- * Prompts for the players selection and gives a random default
- * @returns {string} Players selection
- */
-const playerPlay = function () {
-    return prompt('Please make your choice (Rock, Paper or Scissor): ', computerPlay());
-}
-
-/**
  * Checks the game result for winner
  * @param {object} gameResult gets the players and computers game score
  * @returns {string} winner
@@ -94,45 +86,52 @@ const getWinner = function (gameResult) {
  *  
  */
 
-const game = function () {
-    const maxGameRounds = 5;
-    let gameIsNotFinished = true;
-    let gameRound = 1; // Sentinel
+const playGameRound = function (event) {
 
     let playerSelection;
     let computerSelection;
 
-    let gameResult = {
-        playerPoints: 0,
-        computerPoints: 0
-    };
-
     let winner = '';
 
-    // Loop while game is not finished. Inside the loop we should update the gameround counter.
-    while (gameIsNotFinished) {
 
-        let roundResult = {
+        // We need to check if a button was clicked,
+        // otherwise asked for it
+        // when no button was clicked the game must wait
+        // for button click
+        // we need a variable to check if the player clicked a button,
+        // if this is the case we can varlidate the play result otherwise re run
+        // the while loop.
+        // maybe the while loop is not the solution here anymore!!!
+
+    
+        let gameRoundResult = {
             playerPoint: 0,
             computerPoint: 0
         };
 
-        console.log(gameRound, gameIsNotFinished);
-
-        playerSelection = playerPlay();
+        console.log('Event Target Value: ' + event.target.value);
+        
         computerSelection = computerPlay();
-        roundResult = playGameRound(playerSelection, computerSelection);
+        playerSelection = event.target.value
+        gameRoundResult = getGameRoundResult(playerSelection, computerSelection);
         // The returned result should be used here.
 
-        gameResult.playerPoints += roundResult.playerPoint;
-        gameResult.computerPoints += roundResult.computerPoint;
+        gameResult.playerPoints += gameRoundResult.playerPoint;
+        gameResult.computerPoints += gameRoundResult.computerPoint;
 
-        console.log(`Player vs. Computer ${gameResult.playerPoints} : ${gameResult.computerPoints}`)
+        console.log(`Player vs. Computer ${gameResult.playerPoints} : ${gameResult.computerPoints}`);
 
-        // Update Sentinel
+        // This need to be changed
+        // be should count the game rounds but do it eventually outside this function
+        // if game is finished we need to destroy the event listener or the buttons
+        // and show the results
+        console.log('Game round: ' + gameRound);
         gameRound++;
         gameIsNotFinished = (gameRound > maxGameRounds) ? false : true;
-    }
+
+        // TODO: Check for Game is finished and populate the winner
+        // handle the Gameresult display in the UI
+
 
     winner = getWinner(gameResult);
 
@@ -140,8 +139,23 @@ const game = function () {
 
 }
 
-// game();
+const maxGameRounds = 5;
+let gameIsNotFinished = true;
+let gameRound = 1; // Sentinel
 
-// // Debug play randomly selection for both player for testing the game logic.
-// console.log(playGameRound(playerSelection, computerSelection));
+let gameResult = {
+    playerPoints: 0,
+    computerPoints: 0
+};
 
+const uiElements = {
+    buttons: {
+        buttonRock: document.getElementById('buttonRock'),
+        buttonPaper: document.getElementById('buttonPaper'),
+        buttonScissor: document.getElementById('buttonScissor')
+    }
+}
+
+uiElements.buttons.buttonRock.addEventListener('click', playGameRound, false);
+uiElements.buttons.buttonPaper.addEventListener('click', playGameRound, false);
+uiElements.buttons.buttonScissor.addEventListener('click', playGameRound, false);

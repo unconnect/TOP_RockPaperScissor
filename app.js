@@ -26,7 +26,7 @@ const getRandomInt = function (max) {
  */
 const getGameRoundResult = function (playerSelection, computerSelection) {
 
-    let roundResult = {
+    const roundResult = {
         playerPoint: 0,
         computerPoint: 0
     }
@@ -45,7 +45,7 @@ const getGameRoundResult = function (playerSelection, computerSelection) {
     // Debug check the computers selection for this round.
     console.log('Players selection: ' + playerSelection);
     console.log('Computers selection: ' + computerSelection);
-    
+
     if (computerWon) {
         roundResult.playerPoint = 0;
         roundResult.computerPoint = 1;
@@ -55,8 +55,8 @@ const getGameRoundResult = function (playerSelection, computerSelection) {
     } else if (tie) {
         roundResult.playerPoint = 0;
         roundResult.computerPoint = 0;
-    }  
-        
+    }
+
     console.log(roundResult);
     return roundResult;
 
@@ -82,71 +82,23 @@ const getWinner = function (gameResult) {
 }
 
 /**
- * The main game loop
+ * Play 1 game round
  *  
  */
 
-const playGameRound = function (event) {
 
-    let playerSelection;
-    let computerSelection;
+const playGameRound = function (selectedButtonValue) {
 
-    let winner = '';
+    const computerSelection = computerPlay();
+    const playerSelection = selectedButtonValue;
+    const gameRoundResult = getGameRoundResult(playerSelection, computerSelection);
 
+    gameResult.playerPoints += gameRoundResult.playerPoint;
+    gameResult.computerPoints += gameRoundResult.computerPoint;
 
-        // We need to check if a button was clicked,
-        // otherwise asked for it
-        // when no button was clicked the game must wait
-        // for button click
-        // we need a variable to check if the player clicked a button,
-        // if this is the case we can varlidate the play result otherwise re run
-        // the while loop.
-        // maybe the while loop is not the solution here anymore!!!
-
-    
-        let gameRoundResult = {
-            playerPoint: 0,
-            computerPoint: 0
-        };
-
-        console.log('Event Target Value: ' + event.target.value);
-        
-        computerSelection = computerPlay();
-        playerSelection = event.target.value
-        gameRoundResult = getGameRoundResult(playerSelection, computerSelection);
-        // The returned result should be used here.
-
-        gameResult.playerPoints += gameRoundResult.playerPoint;
-        gameResult.computerPoints += gameRoundResult.computerPoint;
-
-        console.log(`Player vs. Computer ${gameResult.playerPoints} : ${gameResult.computerPoints}`);
-
-        // This need to be changed
-        // be should count the game rounds but do it eventually outside this function
-        // if game is finished we need to destroy the event listener or the buttons
-        // and show the results
-        console.log('Game round: ' + gameRound);
-        gameRound++;
-        gameIsNotFinished = (gameRound > maxGameRounds) ? false : true;
-
-        // TODO: Check for Game is finished and populate the winner
-        // handle the Gameresult display in the UI
-
-
-    winner = getWinner(gameResult);
-
-    console.log(`The winner of the game is ${winner}!`);
+    console.log(`Player vs. Computer ${gameResult.playerPoints} : ${gameResult.computerPoints}`);
 
 }
-
-const maxGameRounds = 5;
-let gameIsNotFinished = true;
-let gameRound = 1; // Sentinel
-
-let gameResult = {
-    playerPoints: 0,
-    computerPoints: 0
-};
 
 const uiElements = {
     buttons: {
@@ -156,7 +108,37 @@ const uiElements = {
     }
 }
 
-// use a foreach for this
-uiElements.buttons.buttonRock.addEventListener('click', playGameRound, false);
-uiElements.buttons.buttonPaper.addEventListener('click', playGameRound, false);
-uiElements.buttons.buttonScissor.addEventListener('click', playGameRound, false);
+const maxGameRounds = 5;
+let gameIsFinished = false;
+let gameRound = 1; // Sentinel
+
+const gameResult = {
+    playerPoints: 0,
+    computerPoints: 0
+};
+
+let winner = '';
+
+const game = function(e) {
+    
+
+
+    console.log('Game round: ' + gameRound);
+    gameIsFinished = (gameRound >= maxGameRounds) ? true : false;
+
+    // Check for Winner and Gameround counter must be rethinked!
+
+    if (!gameIsFinished) {
+        playGameRound(e.target.value);
+    } else {
+        winner = getWinner(gameResult);
+        console.log(`The winner of the game is ${winner}!`);
+    }
+    gameRound++;
+
+}
+
+Object.values(uiElements.buttons).forEach(button => {
+    button.addEventListener('click', game, false);
+});
+

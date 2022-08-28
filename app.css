@@ -8,16 +8,66 @@ pre {
     flex-direction: column;
     justify-content: space-between;
     height:100vh;
+    gap: 0.5rem;
 }
 
 .game > * {
-    margin-bottom: 1rem;
-    height: calc(50% - 1rem);
+    height: calc(100% / 10)
+}
+.game__status {
+    flex: 10;
+}
+
+.game__score {
+    flex: 1 1 0%;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.game__choices {
+    flex: 3 0 20%;
 }
 
 .message-list {
     height: calc(100%);
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    margin-right: -2rem;
+    padding-right: 2rem;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.message {
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+}
+
+.message.-left {
+    align-self: flex-start;
+}
+
+.message.-right {
+    align-self: flex-end;
+}
+
+.message.-left i {
+    margin-right: 2rem;
+}
+
+.message.-right i {
+    margin-left: 2rem;;
+}
+
+.message-list .nes-mario {
+    transform: scaleX(-1);
 }
 
 .game__choices {
@@ -53,3 +103,10 @@ pre {
 .game__choices .selected [class$="--assci"] {
     background-color:white;
 } 
+
+.game__choices .nes-badge {
+    display: none;
+}
+.game__choices .selected .nes-badge {
+    display: block;
+}

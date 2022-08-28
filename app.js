@@ -1,9 +1,9 @@
 /**
  * TODO:
  * - [ ] Create buttons with js
- * - [ ] Mark selected players hand
+ * - [x] Mark selected players hand
  * - [x] remove timeouts or make them work better
- * - [ ] Restart game with button and no countdown
+ * - [x] Restart game with button and no countdown
  * - [x] show game status in separate ui section
  */
 

@@ -14,7 +14,7 @@
 
     <!-- CSS NES framework -->
     <link
-      href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css"
+      href="vendor/styles/nes.css"
       rel="stylesheet"
     />
 
@@ -27,7 +27,10 @@
         <p class="title">
             Game Status
         </p>
+        
         <section class="message-list">
+         
+          <!-- Message Balloon START -->
           <section class="message -left">
             <i class="nes-bcrikko"></i>
             <!-- Balloon -->
@@ -39,26 +42,18 @@
               </p>
             </div>
           </section>
+          <!-- END Message Balloon -->
 
-          <section class="message -left">
-            <i class="nes-bcrikko"></i>
-            <!-- Balloon -->
-            <div class="nes-balloon from-left">
-              <p>I played: ROCK</p>
-            </div>
-          </section>
-          <section class="message -left">
-            <i class="nes-bcrikko"></i>
-            <!-- Balloon -->
-            <div class="nes-balloon from-left">
-              <p>I played: ROCK</p>
-            </div>
-          </section>
+          <!-- Game status message ballons will attached here: -->
+
         </section>
       </section>
       <section class="game__choices nes-container  is-dark">
 
         <div class="game__choices_rock nes-container is-rounded">
+                    <div class="nes-badge">
+              <span class="is-warning">Selected</span>
+          </div>
           <div class="game__choices_rock--assci">
             <pre>
    ______
@@ -74,9 +69,9 @@
         </div>
 
         <div class="game__choices_paper nes-container is-rounded selected">
-            <div class="nes-badge">
-                <span class="is-warning">Selected</span>
-            </div>
+          <div class="nes-badge">
+              <span class="is-warning">Selected</span>
+          </div>
           <div class="game__choices_paper--assci">
             <pre>
    ___
@@ -92,6 +87,9 @@
         </div>
 
         <div class="game__choices_scissor nes-container is-rounded">
+                    <div class="nes-badge">
+              <span class="is-warning">Selected</span>
+          </div>
           <div class="game__choices_scissor--assci">
             <pre>
    _____

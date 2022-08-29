@@ -1,11 +1,29 @@
+const uiElements = {
+  buttons: {
+    buttonRock: document.getElementById('buttonRock'),
+    buttonPaper: document.getElementById('buttonPaper'),
+    buttonScissor: document.getElementById('buttonScissor'),
+  },
+}
+
+const gameResult = {
+  playerPoints: 0,
+  computerPoints: 0,
+}
+
 /**
- * TODO:
- * - [ ] Create buttons with js
- * - [x] Mark selected players hand
- * - [x] remove timeouts or make them work better
- * - [x] Restart game with button and no countdown
- * - [x] show game status in separate ui section
+ * Main Game function, is called every time one of the players buttons is clicked.
+ * @param {object} e - the click event object 
  */
+const playGame = function (e) {
+  playGameRound(e)
+  refreshGamescore(gameResult)
+  announceTheWinner(gameResult)
+}
+
+Object.values(uiElements.buttons).forEach((button) => {
+  button.addEventListener('click', playGame, false)
+})
 
 /**
  * Computer play
@@ -61,7 +79,7 @@ const createAndAttachGameStatusMessageBalloon = function (
   message.appendChild(messageSection)
 
   if (messageOrientationToRight) {
-    playerIcon.classList.add('nes-mario')
+    playerIcon.classList.add('nes-bcrikko')
     message.querySelector('.nes-balloon').after(playerIcon)
   } else {
     playerIcon.classList.add('nes-bcrikko')
@@ -173,42 +191,19 @@ const playGameRound = function (event) {
 }
 
 /**
- * Reloads the browser window and restarts the game
+ * Check if the game reached the end condition and announces the winner. Then asks for a new game.
+ * @param {object} gameResult 
  */
-
-const restartGame = function () {
-  window.location.reload()
-}
-
-const uiElements = {
-  buttons: {
-    buttonRock: document.getElementById('buttonRock'),
-    buttonPaper: document.getElementById('buttonPaper'),
-    buttonScissor: document.getElementById('buttonScissor'),
-  },
-}
-
-let timeOutHandler = 0
-let gameRound = 1 // Sentinel
-
-const gameResult = {
-  playerPoints: 0,
-  computerPoints: 0,
-}
-
-const playGame = function (e) {
-  console.log('Game round: ' + gameRound)
-  // Check for Winner and Gameround counter must be rethinked!
-  playGameRound(e)
-  gameRound++
-  refreshGamescore(gameResult)
-
-  // extract in sepearte function
+const announceTheWinner = function (gameResult) {
   if (checkGameForEnd(gameResult)) {
     const winner = getWinner(gameResult)
 
     if (winner === 'Computer') {
-      createAndAttachGameStatusMessageBalloon(false, `I have won the game!`, '<i class="nes-icon trophy is-large"></i>')
+      createAndAttachGameStatusMessageBalloon(
+        false,
+        `I have won the game!`,
+        '<i class="nes-icon trophy is-large"></i>'
+      )
     }
 
     if (winner === 'Player') {
@@ -230,6 +225,9 @@ const playGame = function (e) {
   }
 }
 
-Object.values(uiElements.buttons).forEach((button) => {
-  button.addEventListener('click', playGame, false)
-})
+/**
+ * Reloads the browser window and restarts the game
+ */
+const restartGame = function () {
+  window.location.reload()
+}
